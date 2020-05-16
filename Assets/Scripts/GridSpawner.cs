@@ -20,14 +20,12 @@ public class GridSpawner : MonoBehaviour
         {
             float x = 0;
             float z = 0;
-            if (createPosX(ref x, -8, 8) == true && createPosZ(ref z, -9,9)==true)
+            if ((createPosX(ref x, -8, 8) == true && createPosZ(ref z, -9,9)==true) || (createPosX(ref x, -8,8) == false && createPosZ(ref z, -9, 9) == true))
             {
                 Vector3 CreatedPos = new Vector3(x, 0, z) + gridOrigin;
                 Instantiate(DestructibleWall, CreatedPos, Quaternion.identity);
                 wallAmmount--;
             }
-            Debug.Log(x);
-            Debug.Log(z);
         }
     }
     bool createPosX(ref float value, int min, int max)
