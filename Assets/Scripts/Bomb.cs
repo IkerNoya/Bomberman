@@ -6,9 +6,11 @@ public class Bomb : MonoBehaviour
 {
     float timer = 3;
     GameObject player;
+    public GameObject explotion;
     private void Start()
     {
         player = GameObject.Find("Player");
+        Destroy(gameObject, 3.1f);
     }
     void Update()
     {
@@ -17,8 +19,15 @@ public class Bomb : MonoBehaviour
             timer -= Time.deltaTime;
             if (timer <= 0)
             {
-                Destroy(gameObject);
+                GameObject clone1 = (GameObject)Instantiate(explotion, transform.position + Vector3.right, Quaternion.identity);
+                GameObject clone2 = (GameObject)Instantiate(explotion, transform.position + Vector3.forward, Quaternion.identity);
+                GameObject clone3 = (GameObject)Instantiate(explotion, transform.position + Vector3.left, Quaternion.identity);
+                GameObject clone4 = (GameObject)Instantiate(explotion, transform.position + Vector3.back, Quaternion.identity);
                 player.GetComponent<Player>().isActive = false;
+                Destroy(clone1, 0.8f);
+                Destroy(clone2, 0.8f);
+                Destroy(clone3, 0.8f);
+                Destroy(clone4, 0.8f);
             }
         }
     }
