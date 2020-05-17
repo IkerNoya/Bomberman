@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
         GetComponent<Rigidbody>().velocity = movement * Time.deltaTime;
         GetComponent<Rigidbody>().AddForce(movement * movementSpeed);
     }
-    float getAngle(Vector3 from, Vector3 to)
+    public float getAngle(Vector3 from, Vector3 to)
     {
         float angle;
         Vector3 right = Vector3.right; //para que solo se mueva en x

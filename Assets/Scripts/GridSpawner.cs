@@ -5,28 +5,38 @@ using UnityEngine;
 public class GridSpawner : MonoBehaviour
 {
     public GameObject DestructibleWall;
-    public float gridX;
+    public List<GameObject> enemies = new List<GameObject>();
+    int minX = -8;
+    int maxX = 8;
+    int minZ = -9;
+    int maxZ = 9;
     public float gridY;
     public float gridSpacing = 1.0f;
     public Vector3 gridOrigin = Vector3.zero;
     public int wallAmmount;
-    void Update()
+    void Start()
     {
         SpawnInGrid();
     }
     void SpawnInGrid()
     {
-        if (wallAmmount > 0)
+        while (wallAmmount > 0)
         {
             float x = 0;
             float z = 0;
-            if ((createPosX(ref x, -8, 8) == true && createPosZ(ref z, -9,9)==true) || (createPosX(ref x, -8,8) == false && createPosZ(ref z, -9, 9) == true))
+            if ((createPosX(ref x, minX, maxX) == true && createPosZ(ref z, minZ, maxZ) == true) || (createPosX(ref x, minX, maxX) == false && createPosZ(ref z, minZ, maxZ) == true))
             {
-                Vector3 CreatedPos = new Vector3(x, 0, z) + gridOrigin;
-                Instantiate(DestructibleWall, CreatedPos, Quaternion.identity);
-                wallAmmount--;
+                Vector3 CreatedPos = new Vector3(x, enemies[0].transform.position.y, z); // para checkear si se crea en la misma posicion que los enemigos
+                if (CreatedPos != enemies[0].transform.position)
+                {
+                    CreatedPos.y = 0;
+                    CreatedPos = CreatedPos + gridOrigin;
+                    Instantiate(DestructibleWall, CreatedPos, Quaternion.identity);
+                    wallAmmount--;
+                }
             }
         }
+        
     }
     bool createPosX(ref float value, int min, int max)
     {
@@ -35,7 +45,7 @@ public class GridSpawner : MonoBehaviour
         {
             return false;
         }
-        else
+        else 
         {
             return true;
         }
