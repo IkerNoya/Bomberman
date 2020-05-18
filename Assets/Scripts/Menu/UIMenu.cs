@@ -9,7 +9,7 @@ public class UIMenu : MonoBehaviour
     public Manager manager;
     public void OnClickGame()
     {
-        SceneManager.LoadScene("GamePlay");
+        manager.StartGame();
     }
     public void OnClickCredtis()
     {
