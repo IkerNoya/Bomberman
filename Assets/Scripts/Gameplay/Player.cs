@@ -16,8 +16,10 @@ public class Player : MonoBehaviour
     int enemyLayer = 10;
     public Camera mainCamera;
     bool Dead = false;
+    bool win = false;
     public Vector3 cameraOffset;
     public Vector3 cameraRotation;
+
     private void Update()
     {
         if (!Dead)

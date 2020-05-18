@@ -22,27 +22,25 @@ public class Enemy : MonoBehaviour
 
     int selection = 0;
     int currentSel = 10;
-    int explosionLayer = 12;
     Rigidbody enemy;
     RaycastHit hit;
     enum States
     {
-        front,right,back,left, last
+        front, right, back, left, last
     }
     States states;
     private void Start()
-    { 
+    {
         enemy = GetComponent<Rigidbody>();
         direction = Vector3.forward;
         states = States.front;
     }
     private void Update()
     {
-        if(!canMove)
+        if (!canMove)
         {
             return;
         }
-        Debug.Log(this.gameObject + " = " + direction);
         Debug.DrawRay(transform.position, transform.forward * 0.6f, Color.blue);
     }
     private void FixedUpdate()
@@ -117,7 +115,7 @@ public class Enemy : MonoBehaviour
     {
         float timer = 0;
 
-        while (timer<=0.5f && selection==currentSel)
+        while (timer <= 0.5f && selection == currentSel)
         {
             timer += Time.deltaTime;
             currentSel = Random.Range((int)States.front, (int)States.last);
@@ -147,21 +145,11 @@ public class Enemy : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.layer == 8 || other.gameObject.layer == 9)
+        if (other.gameObject.layer == 8 || other.gameObject.layer == 9)
         {
             enemy.velocity = Vector3.zero;
             enemy.angularVelocity = Vector3.zero;
         }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == explosionLayer)
-        {
-            Die();  
-        }
-    }
-    void Die()
-    {
-        Destroy(gameObject);
+
     }
 }
