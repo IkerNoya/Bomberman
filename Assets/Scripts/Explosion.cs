@@ -13,24 +13,14 @@ public class Explosion : MonoBehaviour
     {
         if (other.gameObject.tag == "D_Wall")
         {
-            Debug.Log("Aca entra wey");
             Destroy(other.gameObject);
         }
-        else
-        {
-            Debug.Log("Aca no entra, como yo");
-        }
-    }
+    } 
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "D_Wall")
         {
-            Debug.Log("Aca entra wey");
             Destroy(other.gameObject);
-        }
-        else
-        {
-            Debug.Log("Aca no entra, como yo");
         }
     }
 }

@@ -6303,6 +6303,7 @@ MonoBehaviour:
   - {fileID: 1277974651}
   - {fileID: 828190769}
   - {fileID: 1124094087}
+  walls: []
   gridY: 20
   gridSpacing: 1
   gridOrigin: {x: 0, y: 0.62, z: 0}
@@ -7469,6 +7470,31 @@ PrefabInstance:
       propertyPath: movementSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2395699490604994975, guid: fe709965780a4ea41ac0c70f639385fa,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 963194227}
+    - target: {fileID: 2395699490604994975, guid: fe709965780a4ea41ac0c70f639385fa,
+        type: 3}
+      propertyPath: cameraOffset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2395699490604994975, guid: fe709965780a4ea41ac0c70f639385fa,
+        type: 3}
+      propertyPath: cameraOffset.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2395699490604994975, guid: fe709965780a4ea41ac0c70f639385fa,
+        type: 3}
+      propertyPath: cameraOffset.z
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2395699490604994975, guid: fe709965780a4ea41ac0c70f639385fa,
+        type: 3}
+      propertyPath: cameraRotation.x
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 2395699490604994978, guid: fe709965780a4ea41ac0c70f639385fa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7482,7 +7508,7 @@ PrefabInstance:
     - target: {fileID: 2395699490604994978, guid: fe709965780a4ea41ac0c70f639385fa,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.96
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 2395699490604994978, guid: fe709965780a4ea41ac0c70f639385fa,
         type: 3}

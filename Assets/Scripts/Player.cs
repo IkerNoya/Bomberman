@@ -14,33 +14,45 @@ public class Player : MonoBehaviour
     public int hp = 3;
     int explosionLayer = 12;
     int enemyLayer = 10;
+    public Camera mainCamera;
+    bool Dead = false;
+    public Vector3 cameraOffset;
+    public Vector3 cameraRotation;
     private void Update()
     {
-
-        if (Input.GetKey(KeyCode.Space) && !isActive)
+        if (!Dead)
         {
-            Instantiate(bomb, CenterPosition(transform.position), Quaternion.identity);
-            isActive = true;
+            if (Input.GetKey(KeyCode.Space) && !isActive)
+            {
+                Instantiate(bomb, CenterPosition(transform.position), Quaternion.identity);
+                isActive = true;
+            }
+
         }
         
     }
     private void FixedUpdate()
     {
-        float vertical = Input.GetAxisRaw("Vertical");
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        Vector3 pos = transform.position;
-        Vector3 futurePos = transform.position + movement * Time.deltaTime;
-        float angle = getAngle(pos, futurePos);
-        Quaternion rot = transform.rotation;
-        Quaternion futureRotation = Quaternion.Euler(0, angle, 0);
-        Quaternion result = Quaternion.Slerp(rot, futureRotation, rotationSpeed * Time.deltaTime);
-        if (Mathf.Abs(horizontal) > 0.001f || Mathf.Abs(vertical) > 0.001f)
+        if (!Dead)
         {
-            transform.rotation = result;
+            mainCamera.transform.position = transform.position + cameraOffset;
+            mainCamera.transform.eulerAngles = cameraRotation;
+            float vertical = Input.GetAxisRaw("Vertical");
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            Vector3 pos = transform.position;
+            Vector3 futurePos = transform.position + movement * Time.deltaTime;
+            float angle = getAngle(pos, futurePos);
+            Quaternion rot = transform.rotation;
+            Quaternion futureRotation = Quaternion.Euler(0, angle, 0);
+            Quaternion result = Quaternion.Slerp(rot, futureRotation, rotationSpeed * Time.deltaTime);
+            if (Mathf.Abs(horizontal) > 0.001f || Mathf.Abs(vertical) > 0.001f)
+            {
+                transform.rotation = result;
+            }
+            movement = new Vector3(horizontal, 0, vertical) * movementSpeed;
+            GetComponent<Rigidbody>().velocity = movement * Time.deltaTime;
+            GetComponent<Rigidbody>().AddForce(movement * movementSpeed);
         }
-        movement = new Vector3(horizontal, 0, vertical) * movementSpeed;
-        GetComponent<Rigidbody>().velocity = movement * Time.deltaTime;
-        GetComponent<Rigidbody>().AddForce(movement * movementSpeed);
     }
     public float getAngle(Vector3 from, Vector3 to)
     {
@@ -86,13 +98,6 @@ public class Player : MonoBehaviour
     }
     void Die()
     {
-        if (hp <= 0)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            hp--;
-        }
+        Dead = true;
     }
 }
