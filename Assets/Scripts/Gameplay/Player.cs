@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿
 using UnityEngine;
-using UnityEngine.Jobs;
 
 public class Player : MonoBehaviour
 {
@@ -24,7 +21,6 @@ public class Player : MonoBehaviour
     int timerLimit = 3;
     public bool end = false;
 
-    int bombLayer = 13;
 
     public delegate void Die();
     public static event Die die;
@@ -34,7 +30,8 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space) && !isActive)
             {
-                Instantiate(bomb, CenterPosition(transform.position), Quaternion.identity);
+                GameObject go = Instantiate(bomb, CenterPosition(transform.position), Quaternion.identity); 
+
                 isActive = true;
             }
 
@@ -121,13 +118,6 @@ public class Player : MonoBehaviour
             {
                 Dead = true;
             }
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.layer == bombLayer)
-        {
-            bomb.GetComponent<Collider>().isTrigger = false;
         }
     }
 }

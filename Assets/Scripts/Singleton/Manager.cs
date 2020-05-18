@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
@@ -59,6 +56,7 @@ public class Manager : MonoBehaviour
         player.GetComponent<Player>().Dead = false;
         player.GetComponent<Player>().end = false;
         player.gameObject.transform.position = initialPos;
+        score = 0;
         SceneManager.LoadScene("GamePlay");
     }
     private void OnDisable()

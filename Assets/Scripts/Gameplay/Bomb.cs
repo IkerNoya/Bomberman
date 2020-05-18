@@ -1,15 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
     float timer = 3;
     GameObject player;
+    int playerLayer = 11;
     public GameObject explosion;
     private void Start()
     {
         player = GameObject.Find("Player");
+        GetComponent<SphereCollider>().isTrigger = true;
         Destroy(gameObject, 3.1f);
     }
     void Update()
@@ -25,6 +26,13 @@ public class Bomb : MonoBehaviour
                 GameObject clone4 = (GameObject)Instantiate(explosion, transform.position + Vector3.back, Quaternion.identity);
                 player.GetComponent<Player>().isActive = false;
             }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == playerLayer)
+        {
+            GetComponent<SphereCollider>().isTrigger = false;
         }
     }
 }
