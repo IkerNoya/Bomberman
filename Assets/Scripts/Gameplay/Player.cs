@@ -11,15 +11,23 @@ public class Player : MonoBehaviour
     Vector3 movement;
     public GameObject bomb;
     public bool isActive = false;
-    public int hp = 3;
+    public int hp = 2;
     int explosionLayer = 12;
     int enemyLayer = 10;
     public Camera mainCamera;
-    bool Dead = false;
+    public bool Dead = false;
     bool win = false;
     public Vector3 cameraOffset;
     public Vector3 cameraRotation;
 
+    float endTimer = 0;
+    int timerLimit = 3;
+    public bool end = false;
+
+    int bombLayer = 13;
+
+    public delegate void Die();
+    public static event Die die;
     private void Update()
     {
         if (!Dead)
@@ -31,7 +39,19 @@ public class Player : MonoBehaviour
             }
 
         }
-        
+        if (Dead)
+        {
+            endTimer += Time.deltaTime;
+            if (endTimer>=timerLimit)
+            {
+                end = true;
+            }
+        }
+        if (die != null && end)
+        {
+            die();
+        }
+
     }
     private void FixedUpdate()
     {
@@ -87,7 +107,8 @@ public class Player : MonoBehaviour
             hp--;
             if (hp<=0)
             {
-                Die();
+                Dead = true;
+
             }
         }
     }
@@ -95,11 +116,18 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.layer == explosionLayer)
         {
-            Die();
+            hp--;
+            if (hp <= 0)
+            {
+                Dead = true;
+            }
         }
     }
-    void Die()
+    private void OnTriggerExit(Collider other)
     {
-        Dead = true;
+        if (other.gameObject.layer == bombLayer)
+        {
+            bomb.GetComponent<Collider>().isTrigger = false;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,7 @@ public class Manager : MonoBehaviour
     public int score;
     static Manager instance = null;
     public GameObject player;
+    Vector3 initialPos = new Vector3(8, 0.55f, -9);
 
     public static Manager Get()
     {
@@ -30,6 +32,7 @@ public class Manager : MonoBehaviour
     {
         Explosion.addScoreBox += ScoreBox;
         Explosion.addScoreEnemy += ScoreEnemy;
+        Player.die += Die;
     }
 
     // Update is called once per frame
@@ -45,14 +48,23 @@ public class Manager : MonoBehaviour
     {
         score += 250;
     }
-
-    void StartGame()
+    void Die()
     {
+        SceneManager.LoadScene("GameOver");
+    }
 
+    public void StartGame()
+    {
+        player.GetComponent<Player>().hp = 2;
+        player.GetComponent<Player>().Dead = false;
+        player.GetComponent<Player>().end = false;
+        player.gameObject.transform.position = initialPos;
+        SceneManager.LoadScene("GamePlay");
     }
     private void OnDisable()
     {
         Explosion.addScoreBox -= ScoreBox;
         Explosion.addScoreEnemy -= ScoreEnemy;
+        Player.die -= Die;
     }
 }
