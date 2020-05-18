@@ -21,7 +21,7 @@ public class GridSpawner : MonoBehaviour
     }
     void SpawnInGrid()
     {
-        while (wallAmmount > 0)
+        while(wallAmmount> 0)
         {
             float x = 0;
             float z = 0;
@@ -32,12 +32,11 @@ public class GridSpawner : MonoBehaviour
                 {
                     CreatedPos.y = 0;
                     CreatedPos = CreatedPos + gridOrigin;
-                    Instantiate(DestructibleWall, CreatedPos, Quaternion.identity);
+                    GameObject go = Instantiate(DestructibleWall, CreatedPos, Quaternion.identity);
                     wallAmmount--;
                 }
             }
         }
-        
     }
     bool createPosX(ref float value, int min, int max)
     {

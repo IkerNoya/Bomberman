@@ -24,10 +24,6 @@ public class Bomb : MonoBehaviour
                 GameObject clone3 = (GameObject)Instantiate(explosion, transform.position + Vector3.left, Quaternion.identity);
                 GameObject clone4 = (GameObject)Instantiate(explosion, transform.position + Vector3.back, Quaternion.identity);
                 player.GetComponent<Player>().isActive = false;
-                Destroy(clone1, 0.8f);
-                Destroy(clone2, 0.8f);
-                Destroy(clone3, 0.8f);
-                Destroy(clone4, 0.8f);
             }
         }
     }

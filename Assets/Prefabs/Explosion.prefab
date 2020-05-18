@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 1752205832831870812}
   - component: {fileID: 5791431433189102953}
   - component: {fileID: 6100739531839706825}
+  - component: {fileID: 3019764920091216197}
   m_Layer: 12
-  m_Name: Explotion
+  m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,5 +92,17 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.7, y: 1, z: 0.7}
+  m_Center: {x: 0.0007696152, y: 0, z: -0.003932953}
+--- !u!114 &3019764920091216197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484922108315160645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a4b27f63f6552438859ef8761eec1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

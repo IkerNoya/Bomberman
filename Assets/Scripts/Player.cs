@@ -81,15 +81,18 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.layer == explosionLayer)
         {
-            hp--;
-            if (hp<=0)
-            {
-                Die();
-            }
+            Die();
         }
     }
     void Die()
     {
-        Destroy(gameObject);
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            hp--;
+        }
     }
 }

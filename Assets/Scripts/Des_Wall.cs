@@ -9,17 +9,10 @@ public class Des_Wall : MonoBehaviour
     public int hp = 1;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == explosionLayer)
+        if (other.gameObject.layer == explosionLayer)
         {
-            hp--;
-            if (hp<=0)
-            {
-                Die();
-            }
+            Destroy(gameObject);
         }
-    }
-    void Die()
-    {
-        Destroy(gameObject);
+
     }
 }
