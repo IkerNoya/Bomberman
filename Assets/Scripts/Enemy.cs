@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading;
 using UnityEditorInternal;
 using UnityEngine;
@@ -21,7 +22,7 @@ public class Enemy : MonoBehaviour
 
     int selection = 0;
     int currentSel = 10;
-
+    int explosionLayer = 12;
     Rigidbody enemy;
     RaycastHit hit;
     enum States
@@ -151,5 +152,16 @@ public class Enemy : MonoBehaviour
             enemy.velocity = Vector3.zero;
             enemy.angularVelocity = Vector3.zero;
         }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == explosionLayer)
+        {
+            Die();  
+        }
+    }
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }

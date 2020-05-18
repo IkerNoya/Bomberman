@@ -6,6 +6,7 @@ public class GridSpawner : MonoBehaviour
 {
     public GameObject DestructibleWall;
     public List<GameObject> enemies = new List<GameObject>();
+    public List<GameObject> walls = new List<GameObject>();
     int minX = -8;
     int maxX = 8;
     int minZ = -9;

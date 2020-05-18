@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Jobs;
 
@@ -8,9 +9,11 @@ public class Player : MonoBehaviour
     public float movementSpeed;
     public float rotationSpeed;
     Vector3 movement;
-    bool canMove = false;
     public GameObject bomb;
     public bool isActive = false;
+    public int hp = 3;
+    int explosionLayer = 12;
+    int enemyLayer = 10;
     private void Update()
     {
 
@@ -65,5 +68,28 @@ public class Player : MonoBehaviour
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
+        if (other.gameObject.layer == enemyLayer)
+        {
+            hp--;
+            if (hp<=0)
+            {
+                Die();
+            }
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == explosionLayer)
+        {
+            hp--;
+            if (hp<=0)
+            {
+                Die();
+            }
+        }
+    }
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }
